@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{81702092-1556-447A-880E-7BE591579B20}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AfriStore_Code</RootNamespace>
+    <AssemblyName>AfriStore_Code</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\..\..\eVisa Application\eVisa WebSite\Bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>F:\F Drive\Afrismart\Afrismart Application\AfriStore\bin\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>F:\F Drive\Afrismart\Afrismart Application\AfriStore\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization">
+      <HintPath>F:\F Drive\Afrismart\Afrismart Application\AfriStore\bin\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\assets\css\daterangepicker.css" />
+    <Content Include="Content\assets\css\queries.css" />
+    <Content Include="Content\assets\css\SpryAccordion.css" />
+    <Content Include="Content\assets\css\SpryCollapsiblePanel.css" />
+    <Content Include="Content\assets\css\SpryTabbedPanels.css" />
+    <Content Include="Content\assets\images\admin_logo.svg" />
+    <Content Include="Content\assets\images\admin_menu.svg" />
+    <Content Include="Content\assets\images\arrow-up.png" />
+    <Content Include="Content\assets\images\betking.jpg" />
+    <Content Include="Content\assets\images\bg5.gif" />
+    <Content Include="Content\assets\images\bg6.gif" />
+    <Content Include="Content\assets\images\emov_admin.svg" />
+    <Content Include="Content\assets\images\emov_logo_black.svg" />
+    <Content Include="Content\assets\images\icons\admin_empty.svg" />
+    <Content Include="Content\assets\images\icons\admin_panel_settings_icon.svg" />
+    <Content Include="Content\assets\images\icons\date_range_icon.svg" />
+    <Content Include="Content\assets\images\icons\filter_icon.svg" />
+    <Content Include="Content\assets\images\icons\home_icon.svg" />
+    <Content Include="Content\assets\images\icons\Icon awesome-file-pdf.svg" />
+    <Content Include="Content\assets\images\icons\icon_download.svg" />
+    <Content Include="Content\assets\images\icons\is_empty.svg" />
+    <Content Include="Content\assets\images\icons\list_icon.svg" />
+    <Content Include="Content\assets\images\icons\local_printshop_icon.svg" />
+    <Content Include="Content\assets\images\icons\naira_icon.svg" />
+    <Content Include="Content\assets\images\icons\people_icon.svg" />
+    <Content Include="Content\assets\images\icons\power_settings_new_icon.svg" />
+    <Content Include="Content\assets\images\icons\report_icon.svg" />
+    <Content Include="Content\assets\images\icons\settings_icon.svg" />
+    <Content Include="Content\assets\images\icons\slot_creation_success.svg" />
+    <Content Include="Content\assets\images\icons\text_snippet_icon.svg" />
+    <Content Include="Content\assets\images\itemimage.jpg" />
+    <Content Include="Content\assets\images\liberia-immigration-recruit-removebg-preview %281%29.png" />
+    <Content Include="Content\assets\images\loggo.png" />
+    <Content Include="Content\assets\images\loginn_bg.png" />
+    <Content Include="Content\assets\images\login_bg.png" />
+    <Content Include="Content\assets\images\logo.png" />
+    <Content Include="Content\assets\images\logo2.png" />
+    <Content Include="Content\assets\images\logoRed.png" />
+    <Content Include="Content\assets\images\logowhhite.png" />
+    <Content Include="Content\assets\images\logowhite.png" />
+    <Content Include="Content\assets\images\logowhite_old.png" />
+    <Content Include="Content\assets\images\Passport.png" />
+    <Content Include="Content\assets\images\PermitCard.jpg" />
+    <Content Include="Content\assets\images\PermitCard1.jpg" />
+    <Content Include="Content\assets\images\PermitCard2.png" />
+    <Content Include="Content\assets\images\permit_card.png" />
+    <Content Include="Content\assets\images\pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg" />
+    <Content Include="Content\assets\images\profile_header.png" />
+    <Content Include="Content\assets\images\single-applicant-header-bg.svg" />
+    <Content Include="Content\assets\images\User Image 1.png" />
+    <Content Include="Content\assets\images\UserImage.gif" />
+    <Content Include="Content\assets\images\user_avatar_preview.svg" />
+    <Content Include="Content\assets\scripts\app.js" />
+    <Content Include="Content\assets\scripts\daterangepicker.min.js" />
+    <Content Include="Content\assets\scripts\jquery-ui.css" />
+    <Content Include="Content\assets\scripts\jquery-ui.min.js" />
+    <Content Include="Content\assets\scripts\jquery.min.js" />
+    <Content Include="Content\assets\scripts\moment.min.js" />
+    <Content Include="Content\assets\scripts\SpryAccordion.js" />
+    <Content Include="Content\assets\scripts\SpryCollapsiblePanel.js" />
+    <Content Include="Content\assets\scripts\SpryTabbedPanels.js" />
+    <Content Include="Content\assets\style.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="DefaultCountor.aspx" />
+    <Content Include="DefaultStore.aspx" />
+    <Content Include="frmBillCounter.aspx" />
+    <Content Include="frmDuplicatBillPrint.aspx" />
+    <Content Include="frmFreeHoldItem.aspx" />
+    <Content Include="frmItemReturn.aspx" />
+    <Content Include="frmTest.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="repCutomerSalesDetails.aspx" />
+    <Content Include="repItemInword.aspx" />
+    <Content Include="repItemStock.aspx" />
+    <Content Include="repStoreSalesSummary.aspx" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\Pub_AfriStore.pubxml" />
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.modal.min.css" />
+    <Content Include="Scripts\jquery.modal.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="stOrderVerification.aspx" />
+    <Content Include="stUserMaster.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DefaultCountor.aspx.cs">
+      <DependentUpon>DefaultCountor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultCountor.aspx.designer.cs">
+      <DependentUpon>DefaultCountor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DefaultStore.aspx.cs">
+      <DependentUpon>DefaultStore.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultStore.aspx.designer.cs">
+      <DependentUpon>DefaultStore.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmBillCounter.aspx.cs">
+      <DependentUpon>frmBillCounter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmBillCounter.aspx.designer.cs">
+      <DependentUpon>frmBillCounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmDuplicatBillPrint.aspx.cs">
+      <DependentUpon>frmDuplicatBillPrint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmDuplicatBillPrint.aspx.designer.cs">
+      <DependentUpon>frmDuplicatBillPrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmFreeHoldItem.aspx.cs">
+      <DependentUpon>frmFreeHoldItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmFreeHoldItem.aspx.designer.cs">
+      <DependentUpon>frmFreeHoldItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmItemReturn.aspx.cs">
+      <DependentUpon>frmItemReturn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmItemReturn.aspx.designer.cs">
+      <DependentUpon>frmItemReturn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmTest.aspx.cs">
+      <DependentUpon>frmTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmTest.aspx.designer.cs">
+      <DependentUpon>frmTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="repCutomerSalesDetails.aspx.cs">
+      <DependentUpon>repCutomerSalesDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="repCutomerSalesDetails.aspx.designer.cs">
+      <DependentUpon>repCutomerSalesDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="repItemInword.aspx.cs">
+      <DependentUpon>repItemInword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="repItemInword.aspx.designer.cs">
+      <DependentUpon>repItemInword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="repItemStock.aspx.cs">
+      <DependentUpon>repItemStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="repItemStock.aspx.designer.cs">
+      <DependentUpon>repItemStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="repStoreSalesSummary.aspx.cs">
+      <DependentUpon>repStoreSalesSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="repStoreSalesSummary.aspx.designer.cs">
+      <DependentUpon>repStoreSalesSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="stOrderVerification.aspx.cs">
+      <DependentUpon>stOrderVerification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_Code\CommonFunctions.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="stOrderVerification.aspx.designer.cs">
+      <DependentUpon>stOrderVerification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="stUserMaster.aspx.cs">
+      <DependentUpon>stUserMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="stUserMaster.aspx.designer.cs">
+      <DependentUpon>stUserMaster.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\assets\fonts\AvenirLTProBlack.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProBlackOblique.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProBook.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProBookOblique.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProHeavy.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProHeavyOblique.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProLight.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProLightOblique.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProMedium.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProMediumOblique.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProOblique.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTProRoman.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTStd-Black.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTStd-Book.otf" />
+    <Content Include="Content\assets\fonts\AvenirLTStd-Roman.otf" />
+    <Content Include="Content\assets\fonts\Nunito-ExtraLight.ttf" />
+    <Content Include="Content\assets\fonts\Nunito-Light.ttf" />
+    <Content Include="Content\assets\fonts\Nunito-Regular.ttf" />
+    <Content Include="Content\assets\images\63ac370a-d7fb-4dd1-9063-0c73c87d7784.webp" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63740</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:63262/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

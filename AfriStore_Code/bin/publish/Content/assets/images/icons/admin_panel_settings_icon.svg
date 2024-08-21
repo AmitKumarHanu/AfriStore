@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="admin_panel_settings-24px" width="28" height="28" viewBox="0 0 28 28">
+    <defs>
+        <style>
+            .cls-1{fill:none}.cls-2{fill:#fff}
+        </style>
+    </defs>
+    <g id="Group_3926">
+        <path id="Rectangle_1196" d="M0 0H28V28H0z" class="cls-1"/>
+        <path id="Rectangle_1197" d="M0 0H28V28H0z" class="cls-1"/>
+    </g>
+    <g id="Group_3928" transform="translate(3 3.185)">
+        <g id="Group_3927">
+            <path id="Path_7071" d="M20.733 12.755a8.69 8.69 0 0 1 1.267.11v-4.3a2.424 2.424 0 0 0-1.52-2.241l-6.967-2.937a2.642 2.642 0 0 0-2.027 0L4.52 6.326A2.449 2.449 0 0 0 3 8.567v4.408A12.584 12.584 0 0 0 12.5 25a11.884 11.884 0 0 0 2.027-.673 7.156 7.156 0 0 1-1.394-4.227 7.483 7.483 0 0 1 7.6-7.345z" class="cls-2" transform="translate(-3 -3.185)"/>
+            <path id="Path_7072" d="M17 13a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 1.38a1.12 1.12 0 1 1-1.12 1.12A1.125 1.125 0 0 1 17 14.38zm0 5.37a2.725 2.725 0 0 1-2.24-1.17c.05-.72 1.51-1.08 2.24-1.08s2.19.36 2.24 1.08A2.725 2.725 0 0 1 17 19.75z" class="cls-2" transform="translate(1 .815)"/>
+        </g>
+    </g>
+</svg>

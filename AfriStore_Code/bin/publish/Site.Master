@@ -1,0 +1,990 @@
+﻿
+<%@ Master Language="C#" AutoEventWireup="True" Inherits="SiteMaster" Codebehind="Site.master.cs" %>
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> </title>
+     
+   <%-- <script src="Content/assets/scripts/app.js"></script>--%>
+
+    <link href="Content/assets/style.css" rel="stylesheet" />
+    <link href="Content/assets/css/queries.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.plugin.js" ></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="Content/assets/scripts/app.js" ></script>
+      
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  
+     <%-----------Default-------------------%>
+
+     <%-----------PieChart Design-------------------%>
+    <script type="text/javascript">
+      
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var inputVal = document.getElementById('<%=lblZoneCode.ClientID %>').innerText;
+           
+            try {
+                // Create the data table.
+                $.ajax({
+                    type: "POST",
+                    url: "Default.aspx/GetDefaultData",
+                    data: JSON.stringify({ ZoneCode: inputVal }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                       drawchartd1(response.d);
+                    },
+                    error: function () {
+                        //alert("Error 1 loading data...........");
+                    },
+                    404: function () {
+                        alert("Page fun GetDate not call ..........");
+                    },
+                    complete: function () {
+                        if (!weHaveSuccess) {
+                            alert('Success!');
+                        }
+                    }
+
+                });
+            } catch (ex) {
+                //alert(ex);
+            }
+
+        };
+        function drawchartd1(dataValues) {
+
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
+           
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'CategoryName');
+            data.addColumn('number', 'Records');
+            ;
+            for (var i = 0; i < dataValues.length; i++) {
+                data.addRow([dataValues[i].CategoryName, dataValues[i].Records]);
+            }
+            // Instantiate and draw our chart, passing in some options
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_admin'));
+
+            chart.draw(data,
+                {
+                    title: "",
+                    legend: { position: 'bottom' },
+
+                    fontsize: "10px",
+                    chartArea: { width: '90%' },
+                    pieHole: 0.6,
+                    //is3D: true,
+                    //legend: 'none',
+                });
+        }
+
+    </script>
+
+    <%-------1 -GetLineChart-------------------%>
+    <script type="text/javascript">
+          //----------LineChart Design-----------------
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var inputVal = document.getElementById('<%=lblZoneCode.ClientID %>').innerText;
+            $.ajax({
+                type: "POST",
+                url: "Default.aspx/GetCounterLineChart",
+                data: JSON.stringify({ ZoneCode: inputVal }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    drawLineChartd2(response.d);
+
+                },
+                error: function () {
+                    // alert("Error 2 loading data...........");
+                },
+                404: function () {
+                    alert("Page fun GetLineChart not call ..........");
+                },
+                complete: function () {
+                    if (!weHaveSuccess) {
+                        alert('Success!');
+                    }
+                }
+            });
+        };
+
+        function drawLineChartd2(dataValues) {
+            var options = {
+                title: "Item Sales Statics",
+                legend: { position: 'bottom' },
+
+                fontsize: "10px",
+                curveType: 'function',
+                legend: { position: 'bottom' },
+
+            };
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Year');
+            data.addColumn('number', 'Registered');
+            data.addColumn('number', 'Captured');
+            data.addColumn('number', 'Paid');
+            data.addColumn('number', 'Overstay');
+
+            for (var i = 0; i < dataValues.length; i++) {
+                data.addRow([dataValues[i].Year, dataValues[i].Registered, dataValues[i].Captured, dataValues[i].Paid, dataValues[i].Overstay]);
+            }
+            // Instantiate and draw our chart, passing in some options
+            var chart = new google.visualization.LineChart(document.getElementById('curve_admin_chart'));
+
+            chart.draw(data, options);
+        }
+
+
+    </script>
+    
+        
+    <%-----------DefaultCountor-------------------%>
+
+
+    <%-- 0 -GetLineChart() ------------------%>   
+    <script type="text/javascript">
+        //----------LineChart Design-----------------
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var inputVal = document.getElementById('<%=lblZoneCode.ClientID %>').innerText;
+            $.ajax({
+                type: "POST",
+                url: "DefaultCountor.aspx/GetCounterLineChart",
+                data: JSON.stringify({ ZoneCode: inputVal }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    drawLineChartC1(response.d);
+
+                },
+                error: function () {
+                    // alert("Error 2 loading data...........");
+                },
+                404: function () {
+                    alert("Page fun GetLineChart not call ..........");
+                },
+                complete: function () {
+                    if (!weHaveSuccess) {
+                        alert('Success!');
+                    }
+                }
+            });
+        };
+
+        function drawLineChartC1(dataValues) {
+            var options = {
+                title: "Item Sales Statics",
+                legend: { position: 'bottom' },
+
+                fontsize: "10px",
+                curveType: 'function',
+                legend: { position: 'bottom' },
+
+            };
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Year');
+            data.addColumn('number', 'Registered');
+            data.addColumn('number', 'Captured');
+            data.addColumn('number', 'Paid');
+            data.addColumn('number', 'Overstay');
+
+            for (var i = 0; i < dataValues.length; i++) {
+                data.addRow([dataValues[i].Year, dataValues[i].Registered, dataValues[i].Captured, dataValues[i].Paid, dataValues[i].Overstay]);
+            }
+            // Instantiate and draw our chart, passing in some options
+            var chart = new google.visualization.LineChart(document.getElementById('curve_counter_chart_store'));
+
+            chart.draw(data, options);
+        }
+
+
+    </script>
+
+    <%-- 1 -GetCategoryData() ------------------%>    
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var inputVal = document.getElementById('<%=lblZoneCode.ClientID %>').innerText;
+            try {
+                // Create the data table.
+                $.ajax({
+                    type: "POST",
+                    url: "DefaultCountor.aspx/GetCounterCategoryData",
+                    data: JSON.stringify({ ZoneCode: inputVal }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        drawchartC2(response.d);
+                    },
+                    error: function () {
+                        //alert("Error 1 loading data...........");
+                    },
+                    404: function () {
+                        alert("Page fun GetDate not call ..........");
+                    },
+                    complete: function () {
+                        if (!weHaveSuccess) {
+                            alert('Success!');
+                        }
+                    }
+
+                });
+            } catch (ex) {
+                //alert(ex);
+            }
+
+        };
+        function drawchartC2(dataValues) {
+
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'CategoryName');
+            data.addColumn('number', 'Records');
+            ;
+            for (var i = 0; i < dataValues.length; i++) {
+                data.addRow([dataValues[i].CategoryName, dataValues[i].Records]);
+            }
+            // Instantiate and draw our chart, passing in some options
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_Counter_Category'));
+
+            chart.draw(data,
+                {
+                    title: "Item Category Statics",
+                    legend: { position: 'bottom' },
+
+                    fontsize: "10px",
+                    chartArea: { width: '90%' },
+                    pieHole: 0.6,
+                    //is3D: true,
+                    //legend: 'none',
+                });
+        }
+
+    </script>
+
+     <%-- 2 -GetCounterStoreBrandData() -------------------%>
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+
+        function drawChart() {
+            var inputVal = document.getElementById('<%=lblZoneCode.ClientID %>').innerText;
+            try {
+                // Create the data table.
+                $.ajax({
+                    type: "POST",
+                    url: "DefaultCountor.aspx/GetCounterStoreBrandData",
+                    data: JSON.stringify({ ZoneCode: inputVal }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        drawchartC3(response.d);
+                    },
+                    error: function () {
+                        //alert("Error 1 loading data...........");
+                    },
+                    404: function () {
+                        alert("Page fun GetDate not call ..........");
+                    },
+                    complete: function () {
+                        if (!weHaveSuccess) {
+                            alert('Success!');
+                        }
+                    }
+
+                });
+            } catch (ex) {
+                //alert(ex);
+            }
+
+        };
+        function drawchartC3(dataValues) {
+
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Brand');
+            data.addColumn('number', 'Records');
+            ;
+            for (var i = 0; i < dataValues.length; i++) {
+                data.addRow([dataValues[i].Brand, dataValues[i].Records]);
+            }
+            // Instantiate and draw our chart, passing in some options
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_Counter_Brand'));
+
+            chart.draw(data,
+                {
+                    title: "Item Brand Statics ",
+                    legend: { position: 'bottom' },
+
+                    fontsize: "10px",
+                    chartArea: { width: '90%' },
+                    pieHole: 0.6,
+                    //is3D: true,
+                    //legend: 'none',
+                });
+        }
+
+    </script>
+
+    <%--  3 -GetSalesData()-----------------%>
+    <script type="text/javascript">
+
+          // Load the Visualization API and the corechart package.
+          google.charts.load('current', { 'packages': ['corechart'] });
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+              var inputVal = document.getElementById('<%=lblZoneCode.ClientID %>').innerText;
+
+            try {
+                // Create the data table.
+                $.ajax({
+                    type: "POST",
+                    url: "DefaultCountor.aspx/GetCounterSalesData",
+                    data: JSON.stringify({ ZoneCode: inputVal }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+
+                        drawchartC4(response.d);
+                    },
+                    error: function () {
+                        //alert("Error 1 loading data...........");
+                    },
+                    404: function () {
+                        alert("Page fun GetDate not call ..........");
+                    },
+                    complete: function () {
+                        if (!weHaveSuccess) {
+                            alert('Success!');
+                        }
+                    }
+
+                });
+            } catch (ex) {
+                //alert(ex);
+            }
+
+        };
+        function drawchartC4(dataValues) {
+
+
+            //-----------2st Chart------------
+            var data2 = new google.visualization.DataTable();
+            data2.addColumn('date', 'Daily');
+            data2.addColumn('number', 'Amount');
+
+            for (var i = 0; i < dataValues.length; i++) {
+                data2.addRow([new Date(dataValues[i].Daily), dataValues[i].Amount]);
+            }
+            // Instantiate and draw our chart, passing in some options
+            var chart2 = new google.visualization.LineChart(document.getElementById('LineChart_Counter'));
+            chart2.draw(data2, {
+                title: "Daily Sales Satatics ",
+
+                legend: { position: 'bottom' },
+                fontsize: "10px",
+                width: 400,
+                hight: 500,
+                hAxis: {
+                    title: 'Daily',
+                    format: 'MMMM dd, yyyy',
+                    gridlines: { count: 30 }
+                },
+                vAxis: {
+                    title: 'Sales Amount',
+                    gridlines: { color: 'none' },
+                    minValue: 0
+                },
+                legend: 'none'
+                // backgroundColor: '#f1f8e9'
+
+
+            });
+
+
+        }
+
+    </script>
+
+
+   
+    <%--------DefaultStore------------------.--%>
+
+    <%--  1- GetStoreBrandData() ---%>
+    <script type="text/javascript">
+        //----------PieChart Design-----------------
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var inputVal = document.getElementById('<%=lblZoneCode.ClientID %>').innerText;
+            try {
+                // Create the data table.
+                $.ajax({
+                    type: "POST",
+                    url: "DefaultStore.aspx/GetStoreBrandData",
+                    data: JSON.stringify({ ZoneCode: inputVal }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        drawchartS1(response.d);
+                    },
+                    error: function () {
+                        //alert("Error 1 loading data...........");
+                    },
+                    404: function () {
+                        alert("Page fun GetDate not call ..........");
+                    },
+                    complete: function () {
+                        if (!weHaveSuccess) {
+                            alert('Success!');
+                        }
+                    }
+
+                });
+            } catch (ex) {
+                //alert(ex);
+            }
+
+        };
+        function drawchartS1(dataValues) {
+
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Brand');
+            data.addColumn('number', 'Records');
+            ;
+            for (var i = 0; i < dataValues.length; i++) {
+                data.addRow([dataValues[i].Brand, dataValues[i].Records]);
+            }
+            // Instantiate and draw our chart, passing in some options
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_store1'));
+
+            chart.draw(data,
+                {
+                    title: "Item Brand Statics ",
+                    legend: { position: 'bottom' },
+
+                    fontsize: "10px",
+                    chartArea: { width: '90%' },
+                    pieHole: 0.6
+                    //is3D: true,
+                    //legend: 'none',
+                });
+        }
+
+    </script>
+
+    
+    <%-- 2 -GetCategoryData() ------------------%>    
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var inputVal = document.getElementById('<%=lblZoneCode.ClientID %>').innerText;
+            try {
+                // Create the data table.
+                $.ajax({
+                    type: "POST",
+                    url: "DefaultStore.aspx/GetSroreCategoryData",
+                    data: JSON.stringify({ ZoneCode: inputVal }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        drawchart1(response.d);
+                    },
+                    error: function () {
+                        //alert("Error 1 loading data...........");
+                    },
+                    404: function () {
+                        alert("Page fun GetDate not call ..........");
+                    },
+                    complete: function () {
+                        if (!weHaveSuccess) {
+                            alert('Success!');
+                        }
+                    }
+
+                });
+            } catch (ex) {
+                //alert(ex);
+            }
+
+        };
+        function drawchart1(dataValues) {
+
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'CategoryName');
+            data.addColumn('number', 'Records');
+            ;
+            for (var i = 0; i < dataValues.length; i++) {
+                data.addRow([dataValues[i].CategoryName, dataValues[i].Records]);
+            }
+            // Instantiate and draw our chart, passing in some options
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_store2'));
+
+            chart.draw(data,
+                {
+                    title: "Item Category Statics",
+                    legend: { position: 'bottom' },
+
+                    fontsize: "10px",
+                    chartArea: { width: '90%' },
+                    pieHole: 0.6
+                    //is3D: true,
+                    //legend: 'none',
+                });
+        }
+
+    </script>
+
+
+    <%--  3- GetSalesData()  ---%>
+    <script type="text/javascript">
+
+          // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['timeline'] });
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+              var inputVal = document.getElementById('<%=lblZoneCode.ClientID %>').innerText;
+
+            try {
+                // Create the data table.
+                $.ajax({
+                    type: "POST",
+                    url: "DefaultStore.aspx/GetSroreSalesData",
+                    data: JSON.stringify({ ZoneCode: inputVal }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+
+                        drawchartS3(response.d);
+                    },
+                    error: function () {
+                        //alert("Error 1 loading data...........");
+                    },
+                    404: function () {
+                        alert("Page fun GetDate not call ..........");
+                    },
+                    complete: function () {
+                        if (!weHaveSuccess) {
+                            alert('Success!');
+                        }
+                    }
+
+                });
+            } catch (ex) {
+                //alert(ex);
+            }
+
+        };
+        function drawchartS3(dataValues) {
+            //-----------2st Chart------------
+            var data2 = new google.visualization.DataTable();
+            data2.addColumn('date', 'Daily');
+            data2.addColumn('number', 'Amount');
+
+            for (var i = 0; i < dataValues.length; i++) {
+                data2.addRow([new Date(dataValues[i].Daily), dataValues[i].Amount]);
+            }
+            // Instantiate and draw our chart, passing in some options
+            var chart2 = new google.visualization.LineChart(document.getElementById('piechart_store3'));
+            chart2.draw(data2, {
+                title: "Daily Sales Satatics ",
+
+                legend: { position: 'bottom' },
+                fontsize: "10px",
+                width: 400,
+                hight: 500,
+                hAxis: {
+                    title: 'Daily',
+                    format: 'MMMM dd, yyyy',
+                    gridlines: { count: 30 }
+                },
+                vAxis: {
+                    title: 'Sales Amount',
+                    gridlines: { color: 'none' },
+                    minValue: 0
+                },
+                legend: 'none'
+                // backgroundColor: '#f1f8e9'
+
+
+            });
+
+        }
+
+    </script>
+
+
+
+    <style>
+         
+        .avatar {
+        vertical-align: middle;
+        width: 50px;
+        height: 35px;
+        border-radius: 50%;
+        border: solid 1px gray;
+        }
+
+         .emov-noti-dropdown {
+            background-color: white;
+            color: black;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            outline: none;
+         }
+
+         .dropdown {
+            position: relative;
+            display: inline-block;
+         }
+
+         .emov-dropdown-content {
+            display: none;
+            padding: 0px 14px 22px;
+            position: absolute;
+            background-color: white;
+           min-width: 280px;
+    right: -34px;
+    top: 40px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+         }
+
+         .emov-dropdown-content a {
+            color: black;
+            padding: 16px 12px 16px;
+            padding-left: 0px;
+            text-decoration: none;
+            display: block;
+         }
+
+         .dropdown:hover .emov-dropdown-content {
+            display: block;
+         }
+      </style>
+
+    <style type="text/css">
+       
+ 
+.my-notify-info, .my-notify-success, .my-notify-warning, .my-notify-error {
+    padding:10px;
+    margin:10px 0;
+ 
+}
+.my-notify-info:before, .my-notify-success:before, .my-notify-warning:before, .my-notify-error:before {
+    font-family:FontAwesome;
+    font-style:normal;
+    font-weight:400;
+    speak:none;
+    display:inline-block;
+    text-decoration:inherit;
+    width:1em;
+    margin-right:.2em;
+    text-align:center;
+    font-variant:normal;
+    text-transform:none;
+    line-height:1em;
+    margin-left:.2em;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale
+}
+.my-notify-info:before {
+    content:"\f05a";
+}
+.my-notify-success:before {
+    content:'\f00c';
+}
+.my-notify-warning:before {
+    content:'\f071';
+}
+.my-notify-error:before {
+    content:'\f057';
+}
+.my-notify-info {
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+.my-notify-success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+.my-notify-warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+}
+.my-notify-error {
+    color: #D8000C;
+    background-color: #FFD2D2;
+}
+    </style>
+
+</head>
+<body>
+     <form id="form1" runat="server" >
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="True">    </asp:ScriptManager>
+ <!-- copy and paste side bar to full page header everywhere -->
+      <div class="md" id="emov-overlay-menu"></div>
+      <div class="emov-a-wrapper">
+         <!--  EMOV SIDEBAR -->
+ <div id="emov_sidebar" class="emov-a-sidebar emov-sidebar-closed">
+            <div class="emov-a-sidebar-cover">
+               <!--SIDEBAR LOGO-->
+               <div
+                  class="emov-a-sidebar-logo-container emov-a-sidebar-logo-container-mobile-side" style="height:91px;"
+               >
+                 <%-- <img src="Content/assets/images/emov_admin.svg" alt="" />--%>
+                   <img src="Content/assets/images/logowhite.png" alt="" />
+               </div>
+               <!--SIDEBAR USER MOBILE-->
+               <div class="md emov-mobile-user-side">
+               <div class="emov-mobile-user-details">
+                     <div       class="emov-page-header-profile-cover emov-page-header-profile-cover-mobile"     >
+                           <img id="ImgMobile" runat="server" class="avatar"  src="Content/assets/images/profile_header.png" alt="" />
+                        <h6><asp:Label ID="lbl_UserName" runat="server" Text="Site"></asp:Label></h6>
+                     </div>
+                     <div     class="emov-page-header-search-wrapper emov-page-header-search-wrapper-mobile" style="display:block;"   >
+                     
+                        <%--<i class="fa fa-search" style="font-size: 15px;color: rgba(55, 55, 55, 0.8);"></i>
+                        <input type="text" placeholder="SEARCH" />--%>
+                     </div>
+                  </div>
+               </div>
+
+                 <div class="emov-a-sidebar-menu-items-wrap" style="  max-height: 500px; overflow-y: scroll;" >
+                <h1>
+                     <asp:TreeView ID="TVLeftMenu" runat="server"    CssClass="emov-a-sidebar-footer" Width="95%" NodeWrap="True"
+                                Font-Size="12px" ExpandDepth="1" >
+                            <NodeStyle BorderStyle="None"  Width="100%"    ForeColor="white" ImageUrl="Content/assets/images/icons/people_icon.svg" 
+                                ChildNodesPadding="5px" HorizontalPadding="0px" NodeSpacing="0px" VerticalPadding="0px"   />
+                            <ParentNodeStyle Font-Bold="true" CssClass="emov-a-menu-item" />
+                            <RootNodeStyle Font-Bold="true" CssClass="emov-a-menu-item-active" />                           
+                            <LeafNodeStyle VerticalPadding="10px" CssClass="emov-a-menu-item" />
+                            <Nodes>
+                                <asp:TreeNode Text="DMS" Value="DMS"  ></asp:TreeNode>
+                            </Nodes>
+                            <SelectedNodeStyle Font-Underline="false" ForeColor="white" HorizontalPadding="0px" VerticalPadding="0px" />
+                        </asp:TreeView>
+                    </h1>
+                     </div>
+               <!--SIDEBAR MENU-->
+                 
+               <%--<div class="emov-a-sidebar-menu-items-wrap">
+                  <a href="Default" class="emov-a-menu-item emov-a-menu-item-active"  id="dashboard">
+                     <img src="Content/assets/images/icons/home_icon.svg" alt="" />
+                     <p>Dashboard</p>
+                  </a>
+                  <a id="link_applications" runat="server" href="Applications" class="emov-a-menu-item applications">
+                     <img src="Content/assets/images/icons/list_icon.svg" alt="" />
+                     <p>Applications</p>
+                  </a>
+                  <a
+                     href="#"
+                     id=""
+                     class="emov-a-menu-item emov-a-sidebar-dropdown-btn appointment"
+                  >
+                     <img
+                        src="Content/assets/images/icons/date_range_icon.svg"
+                        alt=""
+                     />
+                     <p>Appointments</p>
+                  </a>
+                  <div class="emov-sidebar-dropdown-container">
+                    <a href="AppointmentsConfirm" class="booked">Booked</a>
+                     <a href="Slots" class="slots">Slot Creation</a>
+                  
+                  </div>
+
+                    <a href="#" id="" class="emov-a-menu-item emov-a-sidebar-dropdown-btn appointment">
+                     <img
+                        src="Content/assets/images/icons/people_icon.svg"
+                        alt=""
+                     />
+                     <p>Masters</p>
+                  </a>
+                  <div class="emov-sidebar-dropdown-container">
+                    <a href="UsersMaster" class="booked">User Creation</a>
+                     <a href="Embassy" class="slots">Add Embassy</a>
+                     <a href="VisaType" class="slots">Add Visa Type</a>
+                     <a href="#" class="slots">Add Port</a>
+                      <a href="#" class="slots">Slot Creation</a>
+                     <a href="PurposeOfVisit" class="slots">Add Purpose of Visit</a>
+                  
+                  </div>
+
+                  <a href="Users" class="emov-a-menu-item  users">
+                     <img src="Content/assets/images/icons/people_icon.svg" alt="" />
+                     <p>Users</p>
+                  </a>
+                  <a href="Reports" class="emov-a-menu-item reports">
+                     <img src="Content/assets/images/icons/report_icon.svg" alt="" />
+                     <p>Reports</p>
+                  </a>
+                  <a href="AdminModule" class="emov-a-menu-item admin-module">
+                     <img
+                        src="Content/assets/images/icons/admin_panel_settings_icon.svg"
+                        alt=""
+                     />
+                     <p>Admin Module</p>
+                  </a>
+               </div>--%>
+               <div    class="emov-a-sidebar-menu-items-wrap emov-a-sidebar-footer"     >
+                  <hr />
+                  <%--<a href="Slots" class="emov-a-menu-item settings">
+                     <img src="Content/assets/images/icons/settings_icon.svg" alt="" />
+                     <p>Settings</p>
+                  </a>--%>
+                  <a href="Login" class="emov-a-menu-item login" id="lblLogout" runat="server" onserverclick="lblLogout_ServerClick" >
+                     <img
+                        src="Content/assets/images/icons/power_settings_new_icon.svg"
+                        alt=""
+                     />
+                     <p>Logout</p>
+
+                  </a>
+               </div>
+            </div>
+         </div>
+          
+         <div class="emov-page-container" style="display:block;">
+            <div class="emov-page-header" >
+               <!--HEADER LOGO-->
+               <div
+                  class="md emov-a-sidebar-logo-container emov-a-sidebar-logo-container-mobile"
+               >
+                  <%--<img src="Content/assets/images/emov_logo_black.svg" alt="" />--%>
+                   <img src="Content/assets/images/logowhite.png" alt="" />
+               </div>
+               <!---HEADER SEARCH-->
+               <div class="lg lg-flex">
+                <%--  <i class="fa fa-search" style="font-size: 15px;color: rgba(55, 55, 55, 0.8);"></i>--%>
+                       <asp:Label  ID="lblZoneCode" runat="server" Font-Size="Medium"  Font-Italic="true" Font-Bold="false" Visible="true" ForeColor="White" BackColor="White"></asp:Label>
+                       
+                  <%--<input type="text" placeholder="SEARCH" />--%>
+               </div>
+
+               <!--HEADER NOTIFICATION-->
+               <div class="emov-page-header-profile-container">
+                   <div class="dropdown">
+                     <button
+                        class="emov-noti-dropdown emov-page-header-notification-cover emov-notificattion-bel"
+                     >
+                        <i class="fa fa-bell emov-bell" style="font-size:20px"></i>
+                        <div class="emov-page-header-notification-dot"></div>
+                     </button>
+                     <div class="emov-dropdown-content">
+                        <div class="emov-noti-heading">
+                           <h4>Notifications</h4>
+                        </div>
+                        <a href="#">
+                           <h6>New User sign up</h6>
+                           <p>
+                              New user just signed up and as been added to
+                              pending
+                           </p>
+                        </a>
+                        <a href="#">
+                           <h6>New User sign up</h6>
+                           <p>
+                              New user just signed up and as been added to
+                              pending
+                           </p>
+                        </a>
+                        <a href="#">
+                           <h6>New User sign up</h6>
+                           <p>
+                              New user just signed up and as been added to
+                              pending
+                           </p>
+                        </a>
+                     </div>
+                  </div>
+                  <!--HEADER HAMBURGER-->
+                  <button type="button" class="md menu-button" id="menu_toogle">
+                     <img src="Content/assets/images/admin_menu.svg" alt="" />
+                  </button>
+                  <!--HEADER PROFILE-->
+                  <div class="lg lg-flex emov-page-header-profile-cover" ">
+                     <img id="ImgLogin" runat="server" class="avatar"  src="Content/assets/images/profile_header.png" alt="" />
+                     <h6 style="font-size:12px;"><asp:Label ID="lbl_UserName_header" runat="server" Text=""></asp:Label></h6>
+                  </div>
+                  
+               </div>
+         
+    </div>
+         
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+     </div>
+          </div>   
+         
+             
+             
+        </form>
+</body>
+   
+
+
+</html>
